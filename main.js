@@ -324,3 +324,59 @@ function setRandomPrankVideo() {
     if (videoElem) videoElem.src = random.src;
     if (textElem) textElem.innerHTML = random.text;
 }
+
+// Scroll-to-reveal posters logic
+window.addEventListener('scroll', function() {
+    var postersSection = document.getElementById('posters-section');
+    var scrollPrompt = document.getElementById('scroll-prompt');
+    if (window.scrollY > 100) {
+        postersSection.style.opacity = '1';
+        postersSection.style.pointerEvents = 'auto';
+        if (scrollPrompt) {
+            scrollPrompt.style.opacity = '0';
+            scrollPrompt.style.pointerEvents = 'none';
+        }
+    } else {
+        postersSection.style.opacity = '0';
+        postersSection.style.pointerEvents = 'none';
+        if (scrollPrompt) {
+            scrollPrompt.style.opacity = '1';
+            scrollPrompt.style.pointerEvents = 'auto';
+        }
+    }
+});
+
+function openEventModal(type) {
+    document.body.style.overflow = 'hidden';
+    if (type === 'vyoma') {
+        document.getElementById('vyoma-modal').style.display = 'flex';
+    } else if (type === 'drishti') {
+        document.getElementById('drishti-modal').style.display = 'flex';
+    }
+}
+
+function closeEventModal() {
+    document.body.style.overflow = '';
+    document.getElementById('vyoma-modal').style.display = 'none';
+    document.getElementById('drishti-modal').style.display = 'none';
+}
+
+// Close modal on overlay click or ESC key
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('event-modal-overlay')) closeEventModal();
+});
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeEventModal();
+});
+
+// Visitor counter scroll logic
+window.addEventListener('scroll', function() {
+    var visitorCounter = document.querySelector('.visitor-counter');
+    if (!visitorCounter) return;
+    // Show when user is within 100px of the bottom
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100)) {
+        visitorCounter.classList.add('visible');
+    } else {
+        visitorCounter.classList.remove('visible');
+    }
+});

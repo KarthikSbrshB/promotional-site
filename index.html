@@ -20,9 +20,9 @@
         </div>
     </div>
 
-    <div id="main-content" style="display:none; color:white; text-align:center;">
+    <div id="main-content">
         <!-- Prank GIF Section -->
-        <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
+        <div class="prank-section">
             <video id="prank-gif" src="img/assets/nagarjuna.mp4" autoplay loop muted playsinline></video>
             <div id="prank-text">attendance kosam scan chesi scam ayyav ga,<br>em parledu, attendance ledu kani manchi events unnai check below</div>
         </div>
@@ -40,7 +40,7 @@
         </div>
 
         <!-- Vyoma Modal -->
-        <div id="vyoma-modal" class="event-modal-overlay" style="display:none;">
+        <div id="vyoma-modal" class="event-modal-overlay">
             <div class="event-modal-content">
                 <button class="event-modal-close" onclick="closeEventModal()">&times;</button>
                 <h1 class="event-modal-title">Vyoma – 24-Hour Hackathon</h1>
@@ -77,7 +77,7 @@
         </div>
 
         <!-- Drishti Modal -->
-        <div id="drishti-modal" class="event-modal-overlay" style="display:none;">
+        <div id="drishti-modal" class="event-modal-overlay">
             <div class="event-modal-content">
                 <button class="event-modal-close" onclick="closeEventModal()">&times;</button>
                 <h1 class="event-modal-title">Drishti – Idea Pitching Event</h1>
@@ -117,69 +117,12 @@
         </div>
         <!-- Footer -->
         <footer>
-            &copy; 2025 Coding Brigade BVRIT | Nikhil Mamilla
+            &copy; 2025 Coding Brigade BVRIT
         </footer>
 
         <!-- Scroll Down Prompt -->
     </div>
 
-    <script>
-        // Scroll-to-reveal posters logic
-        window.addEventListener('scroll', function() {
-            var postersSection = document.getElementById('posters-section');
-            var scrollPrompt = document.getElementById('scroll-prompt');
-            if (window.scrollY > 100) {
-                postersSection.style.opacity = '1';
-                postersSection.style.pointerEvents = 'auto';
-                if (scrollPrompt) {
-                    scrollPrompt.style.opacity = '0';
-                    scrollPrompt.style.pointerEvents = 'none';
-                }
-            } else {
-                postersSection.style.opacity = '0';
-                postersSection.style.pointerEvents = 'none';
-                if (scrollPrompt) {
-                    scrollPrompt.style.opacity = '1';
-                    scrollPrompt.style.pointerEvents = 'auto';
-                }
-            }
-        });
-
-        function openEventModal(type) {
-            document.body.style.overflow = 'hidden';
-            if (type === 'vyoma') {
-                document.getElementById('vyoma-modal').style.display = 'flex';
-            } else if (type === 'drishti') {
-                document.getElementById('drishti-modal').style.display = 'flex';
-            }
-        }
-
-        function closeEventModal() {
-            document.body.style.overflow = '';
-            document.getElementById('vyoma-modal').style.display = 'none';
-            document.getElementById('drishti-modal').style.display = 'none';
-        }
-
-        // Close modal on overlay click or ESC key
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('event-modal-overlay')) closeEventModal();
-        });
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeEventModal();
-        });
-    </script>
-    <script>
-        window.addEventListener('scroll', function() {
-            var visitorCounter = document.querySelector('.visitor-counter');
-            if (!visitorCounter) return;
-            // Show when user is within 100px of the bottom
-            if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100)) {
-                visitorCounter.classList.add('visible');
-            } else {
-                visitorCounter.classList.remove('visible');
-            }
-        });
-    </script>
     <script src="main.js"></script>
 </body>
 
