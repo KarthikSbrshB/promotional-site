@@ -1,0 +1,326 @@
+// TechSurge 2025 - Main JavaScript File
+
+// Global Variables
+let visitorCount = 0;
+let hasInitialized = false;
+
+// Initialize everything when DOM is loaded
+// Loader logic: hide loader and show main-content after 2 seconds
+
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        var loader = document.getElementById('loader');
+        var mainContent = document.getElementById('main-content');
+        if (loader) loader.style.display = 'none';
+        if (mainContent) mainContent.style.display = 'block';
+        setRandomPrankVideo();
+        // Initialize visitor counter after showing content
+        initializeVisitorCounter();
+    }, 2000);
+});
+
+// Main initialization function
+function initializeWebsite() {
+    if (hasInitialized) return;
+    hasInitialized = true;
+
+    // Initialize visitor counter
+    initializeVisitorCounter();
+
+    // Setup loading screen
+    setupLoadingScreen();
+
+    // Setup smooth scrolling
+    setupSmoothScrolling();
+
+    // Log website visit
+    logWebsiteVisit();
+}
+
+// Visitor Counter Functions
+function initializeVisitorCounter() {
+    // Get stored count from memory (since localStorage is not available)
+    visitorCount = getStoredVisitorCount();
+
+    // Increment count for current visit
+    visitorCount++;
+
+    // Update display
+    updateVisitorDisplay();
+
+    // Store updated count
+    storeVisitorCount(visitorCount);
+
+    // Animate counter
+    animateCounter();
+}
+
+function getStoredVisitorCount() {
+    // Since localStorage is not available, we'll use a simple in-memory counter
+    // In a real implementation, this would connect to a backend service
+    return window.visitorCountData || 0;
+}
+
+function storeVisitorCount(count) {
+    // Store in memory for this session
+    window.visitorCountData = count;
+}
+
+function updateVisitorDisplay() {
+    const counterElement = document.getElementById('visitor-count');
+    if (counterElement) {
+        counterElement.textContent = visitorCount;
+    }
+}
+
+function animateCounter() {
+    const counterElement = document.getElementById('visitor-count');
+    if (!counterElement) return;
+
+    let currentCount = 0;
+    const increment = Math.ceil(visitorCount / 30);
+
+    const timer = setInterval(() => {
+        currentCount += increment;
+        if (currentCount >= visitorCount) {
+            currentCount = visitorCount;
+            clearInterval(timer);
+        }
+        counterElement.textContent = currentCount;
+    }, 50);
+}
+
+// Loader and modal logic (if any) can remain
+// Remove all event card, scroll animation, and registration option logic
+
+// Only keep loader logic, modal logic (if any), visitor counter, and scroll prompt logic
+// Remove all unused functions and logic
+
+// Floating Elements Animation
+function setupFloatingElements() {
+    const floatingElements = document.querySelectorAll('.code-snippet');
+
+    floatingElements.forEach((element, index) => {
+        // Random movement
+        setInterval(() => {
+            const randomX = Math.random() * 20 - 10;
+            const randomY = Math.random() * 20 - 10;
+            element.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }, 3000 + index * 500);
+
+        // Random glow effect
+        setInterval(() => {
+            const glowIntensity = Math.random() * 20 + 10;
+            element.style.textShadow = `0 0 ${glowIntensity}px var(--primary-cyan)`;
+        }, 2000 + index * 300);
+    });
+}
+
+// QR Code Interactions
+function setupQRCodeInteractions() {
+    const qrCodes = document.querySelectorAll('.qr-code');
+
+    qrCodes.forEach(qr => {
+        qr.addEventListener('click', function() {
+            // Visual feedback
+            this.style.transform = 'scale(0.9)';
+            this.style.background = 'var(--primary-cyan)';
+
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+                this.style.background = 'var(--text-light)';
+            }, 200);
+
+            // Show message
+            showRegistrationMessage();
+        });
+
+        // Hover effect
+        qr.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1)';
+            this.style.boxShadow = '0 0 20px rgba(0, 212, 255, 0.5)';
+        });
+
+        qr.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = 'none';
+        });
+    });
+}
+
+function showRegistrationMessage() {
+    const message = document.createElement('div');
+    message.innerHTML = `
+        <div style="text-align: center;">
+            <h3>🎯 Registration QR Code</h3>
+            <p>Replace this placeholder with your actual QR code!</p>
+            <small>This is currently a demo version</small>
+        </div>
+    `;
+    message.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 10, 20, 0.95);
+        border: 2px solid var(--primary-cyan);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        z-index: 10000;
+        max-width: 90%;
+        box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        animation: fadeInScale 0.3s ease-out;
+    `;
+
+    document.body.appendChild(message);
+
+    // Close on click
+    message.addEventListener('click', function() {
+        this.remove();
+    });
+
+    // Auto close after 3 seconds
+    setTimeout(() => {
+        if (message.parentNode) {
+            message.remove();
+        }
+    }, 3000);
+}
+
+// Smooth Scrolling
+function setupSmoothScrolling() {
+    // Smooth scroll for scroll indicator
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', function() {
+            const eventsSection = document.querySelector('.events-section');
+            if (eventsSection) {
+                eventsSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    }
+}
+
+// Utility Functions
+function logWebsiteVisit() {
+    // Log visit with timestamp
+    const visitData = {
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        visitorCount: visitorCount,
+        screenSize: `${window.innerWidth}x${window.innerHeight}`
+    };
+
+    console.log('TechSurge 2025 - Website Visit:', visitData);
+
+    // In a real implementation, this would send data to your analytics service
+    // sendAnalyticsData(visitData);
+}
+
+// Add dynamic CSS animations
+function addDynamicStyles() {
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+        }
+        
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        .animate-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Initialize dynamic styles
+addDynamicStyles();
+
+// Performance monitoring
+function monitorPerformance() {
+    // Monitor page load time
+    window.addEventListener('load', function() {
+        const loadTime = performance.now();
+        console.log(`TechSurge 2025 - Page loaded in ${loadTime.toFixed(2)}ms`);
+    });
+
+    // Monitor scroll performance
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            // Optimize animations during scroll
+            const scrollY = window.scrollY;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrollY * 0.5}px)`;
+            }
+        }, 10);
+    });
+}
+
+// Initialize performance monitoring
+monitorPerformance();
+
+// Debug function for development
+function debugInfo() {
+    console.log('TechSurge 2025 - Debug Info:', {
+        visitorCount: visitorCount,
+        hasInitialized: hasInitialized,
+        timestamp: new Date().toISOString(),
+        viewport: `${window.innerWidth}x${window.innerHeight}`
+    });
+}
+
+// Export functions for potential external use
+window.TechSurge = {
+    getVisitorCount: () => visitorCount,
+    debugInfo: debugInfo
+};
+
+// Prank videos and taglines
+const prankVideos = [
+    { src: 'img/assets/brahmi.mp4', text: 'Idhi attendance QR kaadandi… prank QR andi!<br>Kaani nenu mosam chesindhi manchi event tho!' },
+    { src: 'img/assets/mouli.mp4', text: 'free attendance ani chepthey padthadi ani nammakkam neeku undha? mari endukura scan chesav?<br>sar sarle elago scan chesav ga kindha picha events unnai check it oout' },
+    { src: 'img/assets/mr bean.mp4', text: 'scan chesi fool ayyav ga<br>Kaani it\'s okay ra babu…<br>Real event details kinda ready ga unnayi!' },
+    { src: 'img/assets/brahmi2.mp4', text: 'enti free attendance antey nammesava<br>events lo participate cheyu free attendance vasthadi<br>scroll chey bulloda!' },
+    { src: 'img/assets/hindi.mp4', text: 'Mujhe pata hai… iss QR ko scan karke jab tumhein samjha ki ye prank hai ,<br>tumhara reaction bilkul aisa hi hoga<br>Lekin sahi mein worth Varma <br>Niche scroll karo aur event ke dhamakedaar details check karo!' },
+    { src: 'img/assets/venu.mp4', text: 'enti free attendance  ani scan chesthey edo vachai enti ani shock ayyava<br>Attendance ledu… kaani crazy events matram full-on unnai<br>kindaki scroll cheyu macha' },
+    { src: 'img/assets/venu2.mp4', text: 'nuvu free attendance anukoni qr scan chesinanduku thanks bujji<br>events loparticipate chesthey free attendance padudhi<br>hehe check below' },
+    { src: 'img/assets/nagarjuna.mp4', text: 'attendance kosam scan chesi scam ayyav ga,<br>em parledu, attendance ledu kani manchi events unnai check below' }
+];
+
+function setRandomPrankVideo() {
+    const random = prankVideos[Math.floor(Math.random() * prankVideos.length)];
+    var videoElem = document.getElementById('prank-gif');
+    var textElem = document.getElementById('prank-text');
+    if (videoElem) videoElem.src = random.src;
+    if (textElem) textElem.innerHTML = random.text;
+}

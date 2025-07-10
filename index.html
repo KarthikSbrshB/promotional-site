@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechSurge 2025 - CB</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .loader-bg {
+            width: 10rem;
+            height: 10rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .rotating-ring {
+            width: 100%;
+            height: 100%;
+            animation: spin 2s linear infinite;
+            object-fit: contain;
+            display: block;
+            pointer-events: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .cb-center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 8rem;
+            height: 8rem;
+            transform: translate(-50%, -50%);
+            object-fit: contain;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .loading-text {
+            position: absolute;
+            left: 50%;
+            bottom: -2.5rem;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 0.2em;
+            color: #64748b;
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        
+        .dot {
+            display: inline-block;
+            animation: bounce 1.2s infinite;
+        }
+        
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes bounce {
+            0%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-8px);
+            }
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: #181a2a;
+            color: #fff;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #222;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+        }
+        /* Click Me Ribbon */
+        
+        .ribbon {
+            position: absolute;
+            left: 18px;
+            top: -18px;
+            z-index: 2;
+            transform: rotate(-20deg);
+            background: #6a4c1b;
+            color: #fff3c0;
+            font-weight: bold;
+            padding: 0.4rem 1.2rem;
+            border-radius: 1.2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+        
+        .ribbon:hover {
+            transform: translateX(-50%) scale(1.08);
+            box-shadow: 0 8px 32px rgba(229, 46, 113, 0.28), 0 3px 12px rgba(0, 0, 0, 0.18);
+            background: linear-gradient(90deg, #e52e71 0%, #ff8a00 100%);
+            filter: brightness(1.08) saturate(1.2);
+        }
+        /* Visitor Counter */
+        
+        .visitor-counter {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            color: #4cdef5;
+            padding: 0.4rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            z-index: 999;
+            border: 1px solid #4cdef5;
+            margin-bottom: 3rem;
+            display: none;
+        }
+        
+        .visitor-counter.visible {
+            display: block;
+        }
+        
+        .counter-content {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .counter-icon {
+            font-size: 1.2rem;
+        }
+        
+        .counter-number {
+            font-weight: bold;
+            color: #7ee6fa;
+        }
+    </style>
+
+    <!-- Mobile First Responsive Styles -->
+    <style>
+        /* Base Mobile Styles (320px and up) */
+        
+        #main-content {
+            font-size: 1rem;
+            margin-top: 5vh;
+            padding: 0 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        #prank-gif {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            max-height: 280px;
+            display: block;
+            margin: 2rem auto 1.5rem auto;
+            border-radius: 1rem;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+            background: #181a2a;
+        }
+        
+        #prank-text {
+            text-align: center;
+            font-size: 1rem;
+            color: #ffd700;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        
+        #posters-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s;
+            padding: 0 1rem;
+        }
+        
+        .poster-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .event-poster {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            cursor: pointer;
+            border-radius: 1rem;
+            display: block;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .event-poster:hover {
+            transform: scale(1.02);
+        }
+        
+        .ribbon {
+            position: absolute;
+            left: 50%;
+            top: -12px;
+            transform: translateX(-50%) rotate(-20deg);
+            font-size: 0.9rem;
+            padding: 0.3rem 1rem;
+            z-index: 10;
+        }
+        /* Scroll Prompt */
+        
+        #scroll-prompt {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            color: #00d4ff;
+            font-size: 1.1rem;
+            padding: 0.8rem 1rem;
+            z-index: 100;
+            text-align: center;
+            transition: opacity 0.3s;
+        }
+        /* Footer */
+        
+        footer {
+            width: 100%;
+            margin: 3rem 0 0 0;
+            background: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+        /* Visitor Counter Mobile */
+        
+        .visitor-counter {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            font-size: 0.9rem;
+            padding: 0.4rem 0.8rem;
+            z-index: 999;
+        }
+        /* Small Mobile (up to 375px) */
+        
+        @media (max-width: 375px) {
+            #main-content {
+                font-size: 0.9rem;
+                padding: 0 0.5rem;
+            }
+            #prank-gif {
+                max-width: 240px;
+                max-height: 240px;
+            }
+            #prank-text {
+                font-size: 0.9rem;
+                padding: 0 0.5rem;
+            }
+            .poster-wrapper {
+                max-width: 240px;
+            }
+            .event-poster {
+                max-width: 240px;
+            }
+            .ribbon {
+                font-size: 0.8rem;
+                padding: 0.2rem 0.8rem;
+            }
+            #scroll-prompt {
+                font-size: 1rem;
+                padding: 0.6rem 0.5rem;
+            }
+            .visitor-counter {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
+            }
+        }
+        /* Medium Mobile (376px to 480px) */
+        
+        @media (min-width: 376px) and (max-width: 480px) {
+            #prank-gif {
+                max-width: 300px;
+                max-height: 300px;
+            }
+            #prank-text {
+                font-size: 1.1rem;
+            }
+            .poster-wrapper {
+                max-width: 300px;
+            }
+            .event-poster {
+                max-width: 300px;
+            }
+        }
+        /* Large Mobile/Small Tablet (481px to 768px) */
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            #main-content {
+                font-size: 1.1rem;
+                margin-top: 8vh;
+            }
+            #prank-gif {
+                max-width: 350px;
+                max-height: 350px;
+            }
+            #prank-text {
+                font-size: 1.2rem;
+            }
+            .poster-wrapper {
+                max-width: 320px;
+            }
+            .event-poster {
+                max-width: 320px;
+            }
+            #posters-section {
+                gap: 2.5rem;
+            }
+            .ribbon {
+                font-size: 1rem;
+                padding: 0.4rem 1.1rem;
+            }
+        }
+        /* Desktop (769px and up) - ENHANCED */
+        
+        @media (min-width: 769px) {
+            body {
+                background: #000 !important;
+                position: relative;
+            }
+            body::before {
+                display: none !important;
+            }
+            #main-content {
+                font-size: 1.2rem;
+                margin-top: 10vh;
+                padding: 0 2rem;
+                max-width: 1400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #prank-gif {
+                max-width: 600px;
+                max-height: 600px;
+                margin: 3rem auto 2rem auto;
+                border-radius: 2rem;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 100px rgba(76, 222, 245, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            #prank-gif:hover {
+                transform: scale(1.02);
+                box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 120px rgba(76, 222, 245, 0.2);
+            }
+            #prank-text {
+                font-size: 1.8rem;
+                margin-bottom: 3rem;
+                max-width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                background: linear-gradient(135deg, #ffd700 0%, #ff8a00 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                text-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+                font-weight: 600;
+                letter-spacing: 0.5px;
+            }
+            #posters-section {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                gap: 4rem;
+                margin-top: 8rem;
+                margin-bottom: 6rem;
+                padding: 4rem 2rem;
+                background: rgba(255, 255, 255, 0.02);
+                border-radius: 2rem;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .poster-wrapper {
+                position: relative;
+                max-width: 380px;
+                transition: transform 0.4s ease;
+            }
+            .poster-wrapper:hover {
+                transform: translateY(-10px);
+            }
+            .event-poster {
+                width: 100%;
+                max-width: 380px;
+                height: auto;
+                border-radius: 1.5rem;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 80px rgba(76, 222, 245, 0.1);
+                transition: all 0.4s ease;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .event-poster:hover {
+                transform: scale(1.05);
+                box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4), 0 0 120px rgba(76, 222, 245, 0.2), 0 0 200px rgba(126, 230, 250, 0.1);
+            }
+            .ribbon {
+                left: 18px;
+                top: -18px;
+                transform: rotate(-20deg);
+                font-size: 1.2rem;
+                padding: 0.5rem 1.5rem;
+                background: linear-gradient(135deg, #6a4c1b 0%, #8b6914 100%);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+                transition: all 0.3s ease;
+            }
+            .ribbon:hover {
+                transform: rotate(-20deg) scale(1.1);
+                background: linear-gradient(135deg, #e52e71 0%, #ff8a00 100%);
+                box-shadow: 0 12px 35px rgba(229, 46, 113, 0.4);
+            }
+            footer {
+                background: linear-gradient(135deg, #111 0%, #1a1a2e 100%);
+                margin-top: 6rem;
+                padding: 3rem 2rem;
+                font-size: 1.1rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                white-space: nowrap;
+                text-align: center;
+            }
+            .visitor-counter {
+                bottom: 2rem;
+                right: 2rem;
+                font-size: 1rem;
+                padding: 0.8rem 1.5rem;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(10px);
+                border-radius: 2rem;
+                border: 1px solid rgba(76, 222, 245, 0.3);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            }
+        }
+        /* Ultra-wide desktop (1200px and up) */
+        
+        @media (min-width: 1200px) {
+            #main-content {
+                max-width: 1600px;
+                padding: 0 3rem;
+            }
+            #prank-gif {
+                max-width: 700px;
+                max-height: 700px;
+            }
+            #prank-text {
+                font-size: 2.2rem;
+                max-width: 1000px;
+            }
+            #posters-section {
+                gap: 6rem;
+                padding: 5rem 3rem;
+            }
+            .poster-wrapper {
+                max-width: 420px;
+            }
+            .event-poster {
+                max-width: 420px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            footer {
+                font-size: 0.8rem !important;
+            }
+        }
+    </style>
+
+    <!-- Event Modal Styles -->
+    <style>
+        .event-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 20, 22, 0.95);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            transition: opacity 0.3s;
+        }
+        
+        .event-modal-content {
+            background: #232329;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 95vw;
+            max-height: 90vh;
+            padding: 1rem;
+            position: relative;
+            color: #e6e6e6;
+            font-family: inherit;
+            animation: modalIn 0.2s cubic-bezier(.4, 2, .6, 1) 1;
+            overflow-y: auto;
+        }
+        
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.97);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .event-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.2s;
+        }
+        
+        .event-modal-close:hover {
+            background: #444;
+        }
+        
+        .event-modal-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .event-modal-img-col {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .event-modal-img {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            border-radius: 1rem;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+            background: #181a2a;
+        }
+        
+        .event-modal-info-col {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .event-modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #7ee6fa;
+            margin-bottom: 1rem;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .event-modal-theme {
+            font-size: 1.1rem;
+            color: #4cdef5;
+            font-style: italic;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .event-modal-theme span {
+            color: #4cdef5;
+            font-weight: 500;
+        }
+        
+        .event-modal-desc {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #e6e6e6;
+            text-align: center;
+            line-height: 1.4;
+            padding: 0 1rem;
+        }
+        
+        .event-modal-box {
+            background: #23232f;
+            border-radius: 1rem;
+            border: 1px solid #444;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #e6e6e6;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .event-modal-box ul {
+            margin: 0.5rem 0 0 1rem;
+            padding: 0;
+        }
+        
+        .event-modal-box li {
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+        
+        .event-modal-fees {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .event-modal-fee-btn {
+            background: #181a2a;
+            color: #4cdef5;
+            border: 1.5px solid #4cdef5;
+            border-radius: 2rem;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            width: 100%;
+            max-width: 280px;
+            text-align: center;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .event-modal-register-btn {
+            background: #181a2a;
+            color: #fff;
+            border: 2px solid #4cdef5;
+            border-radius: 2rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: background 0.2s, color 0.2s, border 0.2s;
+            width: 100%;
+            max-width: 280px;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .event-modal-register-btn:hover {
+            background: #4cdef5;
+            color: #181a2a;
+            border-color: #7ee6fa;
+        }
+        /* Hide modal title on mobile for specific modals */
+        
+        #drishti-modal .event-modal-title,
+        #vyoma-modal .event-modal-title {
+            display: none;
+        }
+        /* Tablet adjustments */
+        
+        @media (min-width: 481px) and (max-width: 768px) {
+            .event-modal-content {
+                max-width: 90vw;
+                padding: 1.5rem;
+            }
+            .event-modal-img {
+                max-width: 320px;
+            }
+            .event-modal-title {
+                font-size: 1.8rem;
+            }
+            .event-modal-desc {
+                font-size: 1.1rem;
+            }
+            .event-modal-fees {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .event-modal-fee-btn {
+                width: auto;
+                min-width: 200px;
+            }
+            .event-modal-register-btn {
+                width: auto;
+                min-width: 220px;
+            }
+        }
+        /* Desktop modal styles - ENHANCED */
+        
+        @media (min-width: 769px) {
+            .event-modal-overlay {
+                backdrop-filter: blur(8px);
+            }
+            .event-modal-content {
+                max-width: 1400px;
+                padding: 3rem;
+                min-height: 60vh;
+                background: linear-gradient(135deg, #232329 0%, #1a1a2e 100%);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 100px rgba(76, 222, 245, 0.1);
+            }
+            .event-modal-close {
+                width: 3rem;
+                height: 3rem;
+                font-size: 1.8rem;
+                background: linear-gradient(135deg, #333 0%, #444 100%);
+                transition: all 0.2s ease;
+            }
+            .event-modal-close:hover {
+                background: linear-gradient(135deg, #444 0%, #555 100%);
+                transform: scale(1.1);
+            }
+            .event-modal-flex {
+                flex-direction: row;
+                gap: 4rem;
+                align-items: flex-start;
+            }
+            .event-modal-img-col {
+                flex: 0 0 400px;
+            }
+            .event-modal-img {
+                max-width: 400px;
+                border-radius: 1.5rem;
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            }
+            .event-modal-info-col {
+                flex: 1;
+                align-items: flex-start;
+            }
+            .event-modal-title {
+                font-size: 3.2rem;
+                text-align: left;
+                display: block;
+                background: linear-gradient(135deg, #7ee6fa 0%, #4cdef5 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                margin-bottom: 1.5rem;
+            }
+            .event-modal-theme {
+                font-size: 1.4rem;
+                text-align: left;
+                margin-bottom: 1.5rem;
+            }
+            .event-modal-desc {
+                font-size: 1.2rem;
+                text-align: left;
+                padding: 0;
+                line-height: 1.6;
+                margin-bottom: 2rem;
+            }
+            .event-modal-box {
+                font-size: 1.1rem;
+                padding: 1.5rem;
+                margin: 2rem 0;
+                background: linear-gradient(135deg, #23232f 0%, #1e1e2a 100%);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .event-modal-fees {
+                flex-direction: row;
+                justify-content: flex-start;
+                gap: 1.5rem;
+                margin: 2rem 0;
+            }
+            .event-modal-fee-btn {
+                width: auto;
+                min-width: 200px;
+                font-size: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+            .event-modal-register-btn {
+                width: auto;
+                min-width: 250px;
+                font-size: 1.2rem;
+                padding: 1rem 2rem;
+                margin-top: 2rem;
+                box-shadow: 0 8px 25px rgba(76, 222, 245, 0.2);
+            }
+            .event-modal-register-btn:hover {
+                box-shadow: 0 12px 35px rgba(76, 222, 245, 0.3);
+                transform: translateY(-2px);
+            }
+            .event-modal-content {
+                max-height: none !important;
+                overflow-y: visible !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loader-bg" id="loader">
+        <img src="img/outer-ring.png" alt="Rotating Outer Ring" class="rotating-ring">
+        <img src="img/cb-text.png" alt="CB" class="cb-center">
+        <div class="loading-text">
+            <span>loading</span>
+            <span class="dot">.</span>
+            <span class="dot">.</span>
+            <span class="dot">.</span>
+        </div>
+    </div>
+
+    <div id="main-content" style="display:none; color:white; text-align:center;">
+        <!-- Prank GIF Section -->
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
+            <video id="prank-gif" src="img/assets/nagarjuna.mp4" autoplay loop muted playsinline></video>
+            <div id="prank-text">attendance kosam scan chesi scam ayyav ga,<br>em parledu, attendance ledu kani manchi events unnai check below</div>
+        </div>
+
+        <!-- Posters Section -->
+        <div id="posters-section">
+            <div class="poster-wrapper">
+                <div class="ribbon">Click Me</div>
+                <img src="img/Vyoma.PNG" alt="Vyoma Event Poster" class="event-poster" onclick="openEventModal('vyoma')">
+            </div>
+            <div class="poster-wrapper">
+                <div class="ribbon">Click Me</div>
+                <img src="img/Drishti.PNG" alt="Drishti Event Poster" class="event-poster" onclick="openEventModal('drishti')">
+            </div>
+        </div>
+
+        <!-- Vyoma Modal -->
+        <div id="vyoma-modal" class="event-modal-overlay" style="display:none;">
+            <div class="event-modal-content">
+                <button class="event-modal-close" onclick="closeEventModal()">&times;</button>
+                <h1 class="event-modal-title">Vyoma – 24-Hour Hackathon</h1>
+                <div class="event-modal-flex">
+                    <div class="event-modal-img-col">
+                        <img src="img/Vyoma.PNG" alt="Vyoma Poster" class="event-modal-img">
+                    </div>
+                    <div class="event-modal-info-col">
+                        <div class="event-modal-theme">Theme: <span>Smart Tech, Smarter World</span></div>
+                        <p class="event-modal-desc">Vyoma is the centerpiece of <b>TechSurge 2K25</b> – a high-intensity, 24-hour national-level hackathon that challenges participants to push the boundaries of innovation and build tech-driven solutions for a smarter, more connected
+                            world.
+                        </p>
+                        <div class="event-modal-box">
+                            <div>This two-stage competition is designed to identify and empower the most creative minds across the country:</div>
+                            <ul>
+                                <li><b>1) Online PPT Submission:</b> Teams submit a structured idea presentation outlining the problem, solution, tech stack, and impact.</li>
+                                <li><b>2) Offline 24-Hour Hackathon:</b> Shortlisted teams build prototypes across three progressive rounds:
+                                    <ul>
+                                        <li><i>Srishti (Creation):</i> Idea clarity, understanding, and innovation</li>
+                                        <li><i>Sankalp (Commitment):</i> Execution and collaboration</li>
+                                        <li><i>Samarth (Capability):</i> Functionality and real-world impact</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="event-modal-fees">
+                            <button class="event-modal-fee-btn">₹100 – Round 1</button>
+                            <button class="event-modal-fee-btn">₹400 – Round 2</button>
+                        </div>
+                        <button class="event-modal-register-btn">Register for Vyoma</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drishti Modal -->
+        <div id="drishti-modal" class="event-modal-overlay" style="display:none;">
+            <div class="event-modal-content">
+                <button class="event-modal-close" onclick="closeEventModal()">&times;</button>
+                <h1 class="event-modal-title">Drishti – Idea Pitching Event</h1>
+                <div class="event-modal-flex">
+                    <div class="event-modal-img-col">
+                        <img src="img/Drishti.PNG" alt="Drishti Poster" class="event-modal-img">
+                    </div>
+                    <div class="event-modal-info-col">
+                        <div class="event-modal-theme">Pitch. Persuade. Propel.</div>
+                        <p class="event-modal-desc">Drishti is <b>TechSurge 2K25's</b> signature pitching competition inspired by <i>Shark Tank</i>, where innovators present their game-changing ideas to a panel of industry experts, mentors, and potential investors.<br><br>Participants
+                            focus on innovation, feasibility, and market potential. The expert panel offers feedback, evaluates for collaboration, and supports standout ideas.</p>
+                        <div class="event-modal-box">
+                            <div><b>Why Participate?</b></div>
+                            <ul>
+                                <li>Showcase your entrepreneurial vision on a national platform</li>
+                                <li>Gain expert insights and validation</li>
+                                <li>Network with mentors, founders, and investors</li>
+                                <li>Win cash prizes and incubation support</li>
+                            </ul>
+                        </div>
+                        <div class="event-modal-fees">
+                            <button class="event-modal-fee-btn">₹200 Registration Fee</button>
+                        </div>
+                        <button class="event-modal-register-btn">Register for Drishti</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visitor Counter -->
+        <div class="visitor-counter">
+            <div class="counter-content">
+                <span class="counter-icon">👁️</span>
+                <span class="counter-text">Visitors:</span>
+                <span class="counter-number" id="visitor-count">0</span>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer>
+            &copy; 2025 Coding Brigade BVRIT | Nikhil Mamilla
+        </footer>
+
+        <!-- Scroll Down Prompt -->
+    </div>
+
+    <script>
+        // Scroll-to-reveal posters logic
+        window.addEventListener('scroll', function() {
+            var postersSection = document.getElementById('posters-section');
+            var scrollPrompt = document.getElementById('scroll-prompt');
+            if (window.scrollY > 100) {
+                postersSection.style.opacity = '1';
+                postersSection.style.pointerEvents = 'auto';
+                if (scrollPrompt) {
+                    scrollPrompt.style.opacity = '0';
+                    scrollPrompt.style.pointerEvents = 'none';
+                }
+            } else {
+                postersSection.style.opacity = '0';
+                postersSection.style.pointerEvents = 'none';
+                if (scrollPrompt) {
+                    scrollPrompt.style.opacity = '1';
+                    scrollPrompt.style.pointerEvents = 'auto';
+                }
+            }
+        });
+
+        function openEventModal(type) {
+            document.body.style.overflow = 'hidden';
+            if (type === 'vyoma') {
+                document.getElementById('vyoma-modal').style.display = 'flex';
+            } else if (type === 'drishti') {
+                document.getElementById('drishti-modal').style.display = 'flex';
+            }
+        }
+
+        function closeEventModal() {
+            document.body.style.overflow = '';
+            document.getElementById('vyoma-modal').style.display = 'none';
+            document.getElementById('drishti-modal').style.display = 'none';
+        }
+
+        // Close modal on overlay click or ESC key
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('event-modal-overlay')) closeEventModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeEventModal();
+        });
+    </script>
+    <script>
+        window.addEventListener('scroll', function() {
+            var visitorCounter = document.querySelector('.visitor-counter');
+            if (!visitorCounter) return;
+            // Show when user is within 100px of the bottom
+            if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100)) {
+                visitorCounter.classList.add('visible');
+            } else {
+                visitorCounter.classList.remove('visible');
+            }
+        });
+    </script>
+    <script src="main.js"></script>
+</body>
+
+</html>
