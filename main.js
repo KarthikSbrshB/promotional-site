@@ -289,11 +289,11 @@ window.TechSurge = {
 // Prank videos and taglines
 const prankVideos = [{
         src: 'img/assets/brahmi.mp4',
-        text: ' Scan chesi attendance anukunav kada.. fool ayyav ra babu 🤦‍♂️<br>but chill bro 😎 kinda tech vibe undi 💻🚀'
+        text: ' Scan chesi attendance anukunav kada.. fool ayyav ra babu 🤦‍♂️<br>But chill bro 😎 kinda tech vibe undi 💻🚀'
     },
     {
         src: 'img/assets/mouli.mp4',
-        text: 'Free attendance ani chepthey padthadi ani nammakkam neeku undha? 😏<br>mari endukura scan chesav?<br>sar sarle elago scan chesav ga,kindha picha events unnai check it out 🔥'
+        text: 'Free attendance ani chepthey padthadi ani nammakkam neeku undha? 😏<br>mari enduku ra scan chesav?<br>Sar sarle elago scan chesav ga, kindha picha events unnai check it out 🔥'
     },
     {
         src: 'img/assets/mr bean.mp4',
@@ -301,11 +301,11 @@ const prankVideos = [{
     },
     {
         src: 'img/assets/brahmi2.mp4',
-        text: 'Enti free attendance antey nammesava?<br>🎉 Events lo participate cheyu free attendance vasthadi <br>scroll chey bro! 👇'
+        text: 'Enti free attendance antey nammesava?<br>🎉 Events lo participate cheyu free attendance vasthadi <br>Scroll chey bro! 👇'
     },
     {
         src: 'img/assets/hindi.mp4',
-        text: 'Mujhe pata hai… iss QR ko scan karke jab tumhein samjha ki ye prank hai 😆,<br>tumhara reaction bilkul aisa hi hoga <br>Lekin sahi mein worth Varma 💥<br>Niche scroll karo aur event ke dhamakedaar details check karo! 👇'
+        text: 'Mujhe pata hai… iss QR ko scan karke jab tumhein samjha ki ye prank hai 😆,<br>Tumhara reaction bilkul aisa hi hoga <br>Lekin sahi mein worth Varma 💥<br>Niche scroll karo aur event ke dhamakedaar details check karo! 👇'
     },
     {
         src: 'img/assets/venu.mp4',
@@ -313,11 +313,11 @@ const prankVideos = [{
     },
     {
         src: 'img/assets/venu2.mp4',
-        text: 'Nuvu free attendance anukoni qr scan chesinanduku thanks<br>events lo participate chesthey free attendance padudhi <br>hehe check below 👇'
+        text: 'Nuvu free attendance anukoni qr scan chesinanduku thanks<br>Events lo participate chesthey free attendance padudhi <br>Hehe check below 👇'
     },
     {
         src: 'img/assets/nagarjuna.mp4',
-        text: '😆 Attendance kosam scan chesi scam ayyav ga,<br>em parledu, attendance ledu kani manchi events unnai 💯<br>check below 👇'
+        text: '😆 Attendance kosam scan chesi scam ayyav ga,<br>em parledu, Attendance ledu kani manchi events unnai 💯<br>Check below 👇'
     }
 ];
 
