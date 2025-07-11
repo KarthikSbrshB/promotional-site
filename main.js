@@ -11,12 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         var loader = document.getElementById('loader');
         var mainContent = document.getElementById('main-content');
+        var mobileLogo = document.getElementById('mobile-logo');
         if (loader) loader.style.display = 'none';
         if (mainContent) mainContent.style.display = 'block';
+        if (mobileLogo) mobileLogo.style.display = '';
         setRandomPrankVideo();
         // Initialize visitor counter after showing content
         initializeVisitorCounter();
     }, 2000);
+    // Hide mobile logo while loader is visible
+    var mobileLogo = document.getElementById('mobile-logo');
+    if (mobileLogo) mobileLogo.style.display = 'none';
 });
 
 // Main initialization function
@@ -378,5 +383,22 @@ window.addEventListener('scroll', function() {
         visitorCounter.classList.add('visible');
     } else {
         visitorCounter.classList.remove('visible');
+    }
+});
+
+// Hide mobile logo on scroll (only for index.html)
+window.addEventListener('scroll', function() {
+    var mobileLogo = document.getElementById('mobile-logo');
+    if (!mobileLogo) return;
+    if (window.scrollY > 20) {
+        mobileLogo.style.transition = '';
+        mobileLogo.style.opacity = '0';
+        mobileLogo.style.display = 'none';
+        mobileLogo.style.pointerEvents = 'none';
+    } else {
+        mobileLogo.style.display = '';
+        mobileLogo.style.transition = '';
+        mobileLogo.style.opacity = '1';
+        mobileLogo.style.pointerEvents = 'auto';
     }
 });
