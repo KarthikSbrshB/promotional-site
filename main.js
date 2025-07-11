@@ -46,22 +46,27 @@ function initializeWebsite() {
     logWebsiteVisit();
 }
 
-// Visitor Counter Functions (visits.deno.dev + localStorage)
+// Visitor Counter Functions (SheetDB + localStorage)
 const VISITOR_KEY = 'techsurge2025-visited';
-const VISITS_API_URL = 'https://visits.deno.dev/techsurge2025/visitors';
+const SHEETDB_API_URL = 'https://sheetdb.io/api/v1/pcpsye4j6bt5m';
 
 async function updateVisitorCount() {
     let isNewVisitor = !localStorage.getItem(VISITOR_KEY);
     let count;
+    // Always get the current count
+    let res = await fetch(SHEETDB_API_URL);
+    let data = await res.json();
+    // Assume the first row is the counter
+    count = (data[0] && data[0].count) ? parseInt(data[0].count, 10) : 0;
     if (isNewVisitor) {
-        const res = await fetch(VISITS_API_URL, { method: 'POST' });
-        const data = await res.json();
-        count = data.count;
+        count = count + 1;
+        // Update count in Google Sheet
+        await fetch(SHEETDB_API_URL, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: [{ count: count }] })
+        });
         localStorage.setItem(VISITOR_KEY, '1');
-    } else {
-        const res = await fetch(VISITS_API_URL);
-        const data = await res.json();
-        count = data.count;
     }
     displayVisitorCount(count);
 }
