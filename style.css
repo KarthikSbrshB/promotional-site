@@ -319,14 +319,14 @@ body {
 
 #prank-gif {
     width: 100%;
-    max-width: 280px;
     height: auto;
-    max-height: 280px;
+    max-width: 300px;
+    margin-top: 10rem;
     display: block;
-    margin: 2rem auto 1.5rem auto;
     border-radius: 1rem;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
     background: #181a2a;
+    object-fit: contain;
 }
 
 #prank-text {
@@ -334,6 +334,7 @@ body {
     font-size: 1rem;
     color: #ffd700;
     margin-bottom: 2rem;
+    margin-top: 1.2rem;
     padding: 0 1rem;
     line-height: 1.4;
     word-wrap: break-word;
@@ -410,13 +411,37 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.9);
+    width: 100vw;
+    background: #0a0a0a;
     color: #00d4ff;
     font-size: 1.1rem;
-    padding: 0.8rem 1rem;
-    z-index: 100;
-    text-align: center;
+    border-radius: 0;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.10);
+    padding: 0.7rem 1.2rem;
     transition: opacity 0.3s;
+    z-index: 10000;
+    text-align: center;
+    opacity: 1;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 480px) {
+    #scroll-prompt {
+        font-size: 1rem;
+        padding: 0.6rem 0.5rem;
+        border-radius: 0;
+        width: 100vw;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 
@@ -1280,6 +1305,7 @@ footer {
     #prank-text {
         font-size: 1.05rem;
         margin-bottom: 1.2rem;
+        margin-top: 1.2rem;
         padding: 0 0.5rem;
     }
     #scroll-prompt {

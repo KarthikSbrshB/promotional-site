@@ -12,16 +12,20 @@ document.addEventListener('DOMContentLoaded', function() {
         var loader = document.getElementById('loader');
         var mainContent = document.getElementById('main-content');
         var mobileLogo = document.getElementById('mobile-logo');
+        var scrollPrompt = document.getElementById('scroll-prompt');
         if (loader) loader.style.display = 'none';
         if (mainContent) mainContent.style.display = 'block';
         if (mobileLogo) mobileLogo.style.display = '';
+        if (scrollPrompt) scrollPrompt.style.display = '';
         setRandomPrankVideo();
         // Initialize visitor counter after showing content
         initializeVisitorCounter();
     }, 2000);
-    // Hide mobile logo while loader is visible
+    // Hide mobile logo and scroll prompt while loader is visible
     var mobileLogo = document.getElementById('mobile-logo');
     if (mobileLogo) mobileLogo.style.display = 'none';
+    var scrollPrompt = document.getElementById('scroll-prompt');
+    if (scrollPrompt) scrollPrompt.style.display = 'none';
 });
 
 // Main initialization function
