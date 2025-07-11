@@ -1,5 +1,4 @@
-const fetch = require('node-fetch');
-
+// Visitor counter Netlify Function using native fetch (no node-fetch required)
 const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/6871243a3497bd4cad9af69c';
 const JSONBIN_API_KEY = '$2a$10$ofyfg/SJffTq5mkMGirtXe0EJH5u6sP37TmjMwIcyCJKCfUB12z8O';
 
@@ -39,5 +38,4 @@ exports.handler = async function(event) {
     }
 
     return { statusCode: 405, body: 'Method Not Allowed' };
-
 };

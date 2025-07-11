@@ -290,15 +290,38 @@ window.TechSurge = {
 };
 
 // Prank videos and taglines
-const prankVideos = [
-    { src: 'img/assets/brahmi.mp4', text: 'Idhi attendance QR kaadandi… prank QR andi!<br>Kaani nenu mosam chesindhi manchi event tho!' },
-    { src: 'img/assets/mouli.mp4', text: 'free attendance ani chepthey padthadi ani nammakkam neeku undha? mari endukura scan chesav?<br>sar sarle elago scan chesav ga kindha picha events unnai check it oout' },
-    { src: 'img/assets/mr bean.mp4', text: 'scan chesi fool ayyav ga<br>Kaani it\'s okay ra babu…<br>Real event details kinda ready ga unnayi!' },
-    { src: 'img/assets/brahmi2.mp4', text: 'enti free attendance antey nammesava<br>events lo participate cheyu free attendance vasthadi<br>scroll chey bulloda!' },
-    { src: 'img/assets/hindi.mp4', text: 'Mujhe pata hai… iss QR ko scan karke jab tumhein samjha ki ye prank hai ,<br>tumhara reaction bilkul aisa hi hoga<br>Lekin sahi mein worth Varma <br>Niche scroll karo aur event ke dhamakedaar details check karo!' },
-    { src: 'img/assets/venu.mp4', text: 'enti free attendance  ani scan chesthey edo vachai enti ani shock ayyava<br>Attendance ledu… kaani crazy events matram full-on unnai<br>kindaki scroll cheyu macha' },
-    { src: 'img/assets/venu2.mp4', text: 'nuvu free attendance anukoni qr scan chesinanduku thanks bujji<br>events loparticipate chesthey free attendance padudhi<br>hehe check below' },
-    { src: 'img/assets/nagarjuna.mp4', text: 'attendance kosam scan chesi scam ayyav ga,<br>em parledu, attendance ledu kani manchi events unnai check below' }
+const prankVideos = [{
+        src: 'img/assets/brahmi.mp4',
+        text: ' Scan chesi attendance anukunav kada.. fool ayyav ra babu 🤦‍♂️<br>but chill bro 😎 kinda tech vibe undi 💻🚀'
+    },
+    {
+        src: 'img/assets/mouli.mp4',
+        text: 'free attendance ani chepthey padthadi ani nammakkam neeku undha? 😏<br>mari endukura scan chesav?<br>sar sarle elago scan chesav ga,kindha picha events unnai check it out 🔥'
+    },
+    {
+        src: 'img/assets/mr bean.mp4',
+        text: 'Scan chesi attendance kosam ochav.. but meme kosam vastav ani evaru anukunaru bro 😂<br>kinda matram real deal !!! 💯✨'
+    },
+    {
+        src: 'img/assets/brahmi2.mp4',
+        text: 'enti free attendance antey nammesava?<br>🎉 events lo participate cheyu free attendance vasthadi <br>scroll chey bro! 👇'
+    },
+    {
+        src: 'img/assets/hindi.mp4',
+        text: 'Mujhe pata hai… iss QR ko scan karke jab tumhein samjha ki ye prank hai 😆,<br>tumhara reaction bilkul aisa hi hoga <br>Lekin sahi mein worth Varma 💥<br>Niche scroll karo aur event ke dhamakedaar details check karo! 👇'
+    },
+    {
+        src: 'img/assets/venu.mp4',
+        text: '😮 enti free attendance ani scan chesthey edo vachai enti ani shock ayyava<br> Attendance ledu… kaani crazy events matram full-on unnai 😎<br>kindaki scroll cheyu macha 👇🎉'
+    },
+    {
+        src: 'img/assets/venu2.mp4',
+        text: 'nuvu free attendance anukoni qr scan chesinanduku thanks<br>events lo participate chesthey free attendance padudhi <br>hehe check below 👇'
+    },
+    {
+        src: 'img/assets/nagarjuna.mp4',
+        text: '😆 attendance kosam scan chesi scam ayyav ga,<br>em parledu, attendance ledu kani manchi events unnai 💯<br>check below 👇'
+    }
 ];
 
 function setRandomPrankVideo() {
