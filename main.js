@@ -46,24 +46,22 @@ function initializeWebsite() {
     logWebsiteVisit();
 }
 
-// Visitor Counter Functions (CountAPI + localStorage)
+// Visitor Counter Functions (visits.deno.dev + localStorage)
 const VISITOR_KEY = 'techsurge2025-visited';
-const COUNT_API_URL = 'https://api.countapi.xyz';
+const VISITS_API_URL = 'https://visits.deno.dev/techsurge2025/visitors';
 
 async function updateVisitorCount() {
     let isNewVisitor = !localStorage.getItem(VISITOR_KEY);
     let count;
     if (isNewVisitor) {
-        // Increment and get new value
-        const res = await fetch(`${COUNT_API_URL}/hit/techsurge2025/visitors`);
+        const res = await fetch(VISITS_API_URL, { method: 'POST' });
         const data = await res.json();
-        count = data.value;
+        count = data.count;
         localStorage.setItem(VISITOR_KEY, '1');
     } else {
-        // Just get the value
-        const res = await fetch(`${COUNT_API_URL}/get/techsurge2025/visitors`);
+        const res = await fetch(VISITS_API_URL);
         const data = await res.json();
-        count = data.value;
+        count = data.count;
     }
     displayVisitorCount(count);
 }
