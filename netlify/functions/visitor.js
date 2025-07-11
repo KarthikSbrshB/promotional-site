@@ -39,4 +39,5 @@ exports.handler = async function(event) {
     }
 
     return { statusCode: 405, body: 'Method Not Allowed' };
+
 };
