@@ -46,23 +46,26 @@ function initializeWebsite() {
     logWebsiteVisit();
 }
 
-// Visitor Counter Functions (Netlify + localStorage)
+// Visitor Counter Functions (CountAPI + localStorage)
 const VISITOR_KEY = 'techsurge2025-visited';
+const COUNT_API_URL = 'https://api.countapi.xyz';
 
 async function updateVisitorCount() {
     let isNewVisitor = !localStorage.getItem(VISITOR_KEY);
+    let count;
     if (isNewVisitor) {
-        // Call backend to increment and get count
-        const res = await fetch('/.netlify/functions/visitor', { method: 'POST' });
+        // Increment and get new value
+        const res = await fetch(`${COUNT_API_URL}/hit/techsurge2025/visitors`);
         const data = await res.json();
+        count = data.value;
         localStorage.setItem(VISITOR_KEY, '1');
-        displayVisitorCount(data.count);
     } else {
-        // Just get the count
-        const res = await fetch('/.netlify/functions/visitor');
+        // Just get the value
+        const res = await fetch(`${COUNT_API_URL}/get/techsurge2025/visitors`);
         const data = await res.json();
-        displayVisitorCount(data.count);
+        count = data.value;
     }
+    displayVisitorCount(count);
 }
 
 function displayVisitorCount(count) {
