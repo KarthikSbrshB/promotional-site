@@ -46,35 +46,25 @@ function initializeWebsite() {
     logWebsiteVisit();
 }
 
-// Visitor Counter Functions (jsonbin.io + localStorage)
+// Visitor Counter Functions (Netlify proxy + localStorage)
 const VISITOR_KEY = 'techsurge2025-visited';
-const JSONBIN_BIN_ID = '6871243a3497bd4cad9af69c';
-const JSONBIN_API_KEY = '$2a$10$ofyfg/SJffTq5mkMGirtXe0EJH5u6sP37TmjMwIcyCJKCfUB12z8O';
-const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+const VISITOR_API_URL = '/.netlify/functions/visitor';
 
 async function updateVisitorCount() {
     let isNewVisitor = !localStorage.getItem(VISITOR_KEY);
     let count = 0;
 
-    // Get current count
-    let res = await fetch(JSONBIN_URL, {
-        headers: { 'X-Master-Key': JSONBIN_API_KEY }
-    });
-    let data = await res.json();
-    count = data.record.count || 0;
-
     if (isNewVisitor) {
-        count = count + 1;
-        // Update count in jsonbin
-        await fetch(JSONBIN_URL, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Master-Key': JSONBIN_API_KEY
-            },
-            body: JSON.stringify({ count: count })
-        });
+        // Increment and get new value
+        const res = await fetch(VISITOR_API_URL, { method: 'POST' });
+        const data = await res.json();
+        count = data.count;
         localStorage.setItem(VISITOR_KEY, '1');
+    } else {
+        // Just get the value
+        const res = await fetch(VISITOR_API_URL);
+        const data = await res.json();
+        count = data.count;
     }
     displayVisitorCount(count);
 }
