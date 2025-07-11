@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (scrollPrompt) scrollPrompt.style.display = '';
         setRandomPrankVideo();
         // Initialize visitor counter after showing content
-        initializeVisitorCounter();
+        updateVisitorCount();
     }, 2000);
     // Hide mobile logo and scroll prompt while loader is visible
     var mobileLogo = document.getElementById('mobile-logo');
@@ -46,57 +46,28 @@ function initializeWebsite() {
     logWebsiteVisit();
 }
 
-// Visitor Counter Functions
-function initializeVisitorCounter() {
-    // Get stored count from memory (since localStorage is not available)
-    visitorCount = getStoredVisitorCount();
+// Visitor Counter Functions (Netlify + localStorage)
+const VISITOR_KEY = 'techsurge2025-visited';
 
-    // Increment count for current visit
-    visitorCount++;
-
-    // Update display
-    updateVisitorDisplay();
-
-    // Store updated count
-    storeVisitorCount(visitorCount);
-
-    // Animate counter
-    animateCounter();
-}
-
-function getStoredVisitorCount() {
-    // Since localStorage is not available, we'll use a simple in-memory counter
-    // In a real implementation, this would connect to a backend service
-    return window.visitorCountData || 0;
-}
-
-function storeVisitorCount(count) {
-    // Store in memory for this session
-    window.visitorCountData = count;
-}
-
-function updateVisitorDisplay() {
-    const counterElement = document.getElementById('visitor-count');
-    if (counterElement) {
-        counterElement.textContent = visitorCount;
+async function updateVisitorCount() {
+    let isNewVisitor = !localStorage.getItem(VISITOR_KEY);
+    if (isNewVisitor) {
+        // Call backend to increment and get count
+        const res = await fetch('/.netlify/functions/visitor', { method: 'POST' });
+        const data = await res.json();
+        localStorage.setItem(VISITOR_KEY, '1');
+        displayVisitorCount(data.count);
+    } else {
+        // Just get the count
+        const res = await fetch('/.netlify/functions/visitor');
+        const data = await res.json();
+        displayVisitorCount(data.count);
     }
 }
 
-function animateCounter() {
+function displayVisitorCount(count) {
     const counterElement = document.getElementById('visitor-count');
-    if (!counterElement) return;
-
-    let currentCount = 0;
-    const increment = Math.ceil(visitorCount / 30);
-
-    const timer = setInterval(() => {
-        currentCount += increment;
-        if (currentCount >= visitorCount) {
-            currentCount = visitorCount;
-            clearInterval(timer);
-        }
-        counterElement.textContent = currentCount;
-    }, 50);
+    if (counterElement) counterElement.textContent = count;
 }
 
 // Loader and modal logic (if any) can remain
