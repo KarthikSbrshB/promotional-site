@@ -55,17 +55,14 @@ async function updateVisitorCount() {
     let count = 0;
 
     if (isNewVisitor) {
-        // Increment and get new value
-        const res = await fetch(VISITOR_API_URL, { method: 'POST' });
-        const data = await res.json();
-        count = data.count;
+        // Increment the count
+        await fetch(VISITOR_API_URL, { method: 'POST' });
         localStorage.setItem(VISITOR_KEY, '1');
-    } else {
-        // Just get the value
-        const res = await fetch(VISITOR_API_URL);
-        const data = await res.json();
-        count = data.count;
     }
+    // Always fetch and display the latest count
+    const res = await fetch(VISITOR_API_URL);
+    const data = await res.json();
+    count = data.count;
     displayVisitorCount(count);
 }
 
